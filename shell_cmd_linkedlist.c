@@ -12,10 +12,9 @@
  */
 command_lst *at_the_end(command_lst **the_end, const char *cmd)
 {
+    command_lst *new_node, *temp;
     if (!the_end)
         return (NULL);
-    command_lst *new_node, *temp;
-
     new_node = malloc(sizeof(command_lst));
     if (!new_node)
         return (NULL);
@@ -97,12 +96,11 @@ void free_command_btree(cmd_btree_lst **headptr)
  */
 command_lst *del_cmd_at_pos(command_lst **head, size_t pos)
 {
-    if (head == NULL || *head == NULL)
-        return (NULL);
-
     command_lst *current = *head;
     command_lst *previous = *head;
     size_t index_es;
+    if (head == NULL || *head == NULL)
+        return (NULL);
 
     if (pos == 0)
     {
@@ -144,10 +142,10 @@ command_lst *del_cmd_at_pos(command_lst **head, size_t pos)
  */
 char **remove_cmd(command_lst **head)
 {
-    if (!(head && *head))
-       return (NULL);
     command_lst *next_node;
     char **retrieve_tok;
+    if (!(head && *head))
+       return (NULL);
 
     retrieve_tok = (*head)->tokens;
     next_node = (*head)->link;

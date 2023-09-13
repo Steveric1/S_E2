@@ -74,16 +74,16 @@ char **my_token(const char *tok)
  * release_mem - release memory after used
  * @str: str
 */
-void **release_mem(char ***str)
+void release_mem(char ***str)
 {
     char **tok_r;
 
     if (str == NULL)
-        return (NULL);
+        return;
     tok_r = *str;
 
     if (tok_r == NULL)
-        return (NULL);
+        return;
     while (*tok_r)
         free_all(1, *tok_r++);
     free_all(1, *str);

@@ -78,11 +78,10 @@ ssize_t find_char_in_str(const char *str, char ch, size_t size)
  */
 size_t cmd_to_split(char *cmd)
 {
+    cmd_t split;
     if (!cmd)
         return (0);
-    cmd_t split;
     split.cmd_count = 1;
-
     do
     {
         while (*cmd && (split.state = quote_proc(*cmd)) != QUOTE_NONE)

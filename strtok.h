@@ -12,5 +12,5 @@ typedef struct strtok
 
 size_t tok_counter(const char *s);
 char **my_token(const char *tok);
-void **release_mem(char ***str);
+void release_mem(char ***str);
 #endif /*_STRTOK_H_*/

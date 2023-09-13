@@ -74,7 +74,7 @@ void *_memcpy(void *dest, const void *src, size_t n)
 		}
 		return (dest);
 	}
-	
+	return (NULL);
 }
 
 /**
@@ -120,15 +120,21 @@ void *_realloc(void *buffer, size_t old_size, size_t new_size)
 void *_memdup(const void *str, size_t n)
 {
     void *duplicate;
-    duplicate = malloc(n);
-    
-    unsigned char *dup = duplicate;
-    const unsigned char *src = str;
+    unsigned char *dup;
+    const unsigned char *src;
     size_t iterator;
+
+    duplicate = malloc(n);
+
+    if (duplicate == NULL)
+        return NULL;
+    dup = duplicate;
+    src = str;
 
     for (iterator = 0; iterator < n; iterator++)
     {
         *dup++ = *src++;
     }
-    return (duplicate);
+
+    return duplicate;
 }

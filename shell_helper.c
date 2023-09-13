@@ -41,7 +41,7 @@ store_info_t *init_prmpt(char **av, int ac)
         
         if (my_info.fileno == -1)
         {
-            // printerror(av, my_info.error, ac);
+            /*printerror(av, my_info.error, ac);*/
             my_info.status = 127;
         }
     }
