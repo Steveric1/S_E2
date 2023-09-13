@@ -41,7 +41,8 @@ static char *_getline_append(buff_s *buff, char **line, size_t *size, size_t n)
 }
 
 /**
- * _getline_buff - delete, get, and create
+ * _getline_buff - delete, get, and creat
+ * e
  * @table: table
  * @fd: file descriptor
  * Return: NULL or pointer associated with fd
@@ -111,7 +112,7 @@ char *my_getline(const int fd)
                     if (_getline_append(buff_se, &line, &size, buff_se->left_proc))
                         buff_se->next += buff_se->left_proc, buff_se->left_proc = 0;
                     else
-                       break;
+                        break;
                 }
                 else
                 {

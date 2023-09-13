@@ -108,3 +108,27 @@ void *_realloc(void *buffer, size_t old_size, size_t new_size)
 
     return (new_buff);
 }
+
+/**
+ * _memdup - memory duplicate
+ * @str: string to duplicate
+ * @n: size of string to duplicate
+ * 
+ * Return: pointer to the calling function if successful
+ * or NULL is not
+*/
+void *_memdup(const void *str, size_t n)
+{
+    void *duplicate;
+    duplicate = malloc(n);
+    
+    unsigned char *dup = duplicate;
+    const unsigned char *src = str;
+    size_t iterator;
+
+    for (iterator = 0; iterator < n; iterator++)
+    {
+        *dup++ = *src++;
+    }
+    return (duplicate);
+}

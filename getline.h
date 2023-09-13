@@ -36,8 +36,8 @@ typedef struct buff_hash_table
 typedef buff_hash_table_t *buf_node_table[BUFF_TABLE_SIZE];
 
 /**GETLINE PROTOTYPES**/
-char *my_getline(const int fd);
-static char *_getline_append(buff_s *buff, char **line, size_t *size, size_t n);
 static buff_s *_getline_buff(buf_node_table *table, const int fd);
+static char *_getline_append(buff_s *buff, char **line, 
+		size_t *size, size_t n);
 char *my_getline(const int fd);
 #endif /*GETLINE_H*/

@@ -1,5 +1,5 @@
 #include "main.h"
-
+#include "getline.h"
 /**
  * quote_factory - function pointer string processor helper
  * @state: state
@@ -8,7 +8,7 @@
 */
 quote_state_fp quote_factory(quote_state state)
 {
-    switch (state)
+   switch (state)
     {
         case QUOTE_NONE:
            return (quote_none);
@@ -21,7 +21,7 @@ quote_state_fp quote_factory(quote_state state)
         case QUOTE_WORD:
            return (quote_word);
     }
-    return (NULL);
+   return (NULL);
 }
 
 /**
@@ -44,7 +44,7 @@ size_t quote_str_len(const char *str, quote_state state)
 */
 quote_state process_usr_input(char **line_input, int fd)
 {
-    char *line = my_getline(fd), *line_input = line;
+    char *line = *line_input = my_getline(fd);
     static quote_state state = QUOTE_NONE; /*maintain state accross function calls*/
     size_t index = 0;
 
@@ -63,11 +63,17 @@ quote_state process_usr_input(char **line_input, int fd)
                        index += 1;
                     /*Fall-through*/
             default:
-		            state = quote_factory(line[index]);
+		            state = quote_proc(line[index]);
 		            if (state & (QUOTE_DOUBLE | QUOTE_SINGLE | QUOTE_ESCAPE))
 			            index += 1;
                 } while (line[index]);
         }
     }
     return (state);
+}
+
+
+command_lst *cmd_btree(const char * const *not_modifed  __attribute__((unused)))
+{
+   return (NULL);
 }

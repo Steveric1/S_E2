@@ -23,6 +23,10 @@ void *_memcpy(void *dest, const void *src, size_t n);
 void *_realloc(void *buffer, size_t old_size, size_t new_size);
 size_t _strlen(const char *s);
 char *_strcpy(char *dest, const char *src);
+bool _isquote(int c);
+void *_memdup(const void *str, size_t n);
+ssize_t find_char_in_str(const char *str, char ch, size_t size);
+ssize_t _strchr(const char *s, int c);
 
 /**SHELL ERROR**/
 void printerror(char **av, int count, char **arg);
@@ -30,8 +34,6 @@ int write_error_stderr(int error);
 
 /**SHELL HELPER**/
 void free_all(const unsigned int n, ...);
-store_info_t *init_prmpt(char **av, int ac);
-bool read_usr_input(store_info_t *input_info);
 
 /**
  * store_info - store shell information
@@ -84,7 +86,46 @@ size_t quote_escape(const char *str, quote_state *state);
 size_t quote_none(const char *str, quote_state *state);
 size_t quote_word(const char *str, quote_state *state);
 size_t quote_str_len(const char *str, quote_state state);
-
+store_info_t *init_prmpt(char **av, int ac);
+bool read_usr_input(store_info_t *input_info);
+quote_state process_usr_input(char **line_input, int fd);
 /******STRING*******/
 char *str_concat(size_t *len, const char *delim, const char *prev, const char *next);
+
+/*****COMMAND TO SPLIT FUNCTION*****/
+/**
+ * struct cmd - Structure to represent command processing information.
+ * @cmd_count: The count of tokens found in the command string.
+ * @quote_len: The length of the current quoted section.
+ * @delim_indx: The index of the delimiter within a quoted section.
+ * @state: The current quote_state for parsing the command string.
+ */
+typedef struct cmd
+{
+    size_t cmd_count;
+    size_t quote_len;
+    ssize_t delim_indx;
+    quote_state state;
+} cmd_t;
+size_t cmd_to_split(char *cmd);
+
+typedef struct command
+{
+    char **tokens;
+    struct command *link;
+    struct cmd_btree *b_tree;
+
+} command_lst;
+
+command_lst *at_the_end(command_lst **head, const char *cmd);
+void free_command_lst(command_lst **head);
+command_lst *del_cmd_at_pos(command_lst **head, size_t pos);
+char **remove_cmd(command_lst **head);
+typedef struct cmd_btree
+{
+    struct cmd_btree *success;
+    struct cmd_btree *failure;
+    const char * const *ntmodified;
+} cmd_btree_lst;
+void free_command_btree(cmd_btree_lst **headptr);
 #endif /*MAIN_H*/

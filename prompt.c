@@ -1,29 +1,20 @@
 #include "main.h"
 #include "getline.h"
+#include "strtok.h"
 
-int main(int argc, char **argv)
-{
-    if (argc != 2)
-    {
-        fprintf(stderr, "Usage: %s <filename>\n", argv[0]);
-        return 1;
+int main() {
+    char cmd[] = "This is 'a; test' with\\n escape; sequences";
+    size_t count = cmd_to_split(cmd);
+
+    printf("Number of tokens: %zu\n", count);
+
+    // Print each token
+    char *token = cmd;
+    for (size_t i = 0; i < count; i++) {
+        printf("Token %zu: '%s'\n", i + 1, token);
+        // Move to the next token (if any)
+        token += _strlen(token) + 1;
     }
-
-    int fd = open(argv[1], O_RDONLY);
-    if (fd == -1)
-    {
-        perror("Error opening file");
-        return 1;
-    }
-
-    char *line;
-    while ((line = my_getline(fd)) != NULL)
-    {
-        printf("%s", line); // Print each line
-        free(line);         // Don't forget to free the memory allocated by my_getline
-    }
-
-    close(fd); // Close the file descriptor when done
 
     return 0;
 }
