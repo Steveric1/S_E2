@@ -17,7 +17,7 @@ ssize_t _memchr(const void *s, int c, size_t n);
 int _strcmp(char *s1, char *s2);
 int _strncmp(const char *s1, const char *s2, size_t n);
 bool _isspace(int c);
-char *_strdup(char *str);
+char *_strdup(const char *str);
 char *_strstr(const char *haystack, const char *needle);
 void *_memcpy(void *dest, const void *src, size_t n);
 void *_realloc(void *buffer, size_t old_size, size_t new_size);
@@ -121,6 +121,8 @@ command_lst *at_the_end(command_lst **head, const char *cmd);
 void free_command_lst(command_lst **head);
 command_lst *del_cmd_at_pos(command_lst **head, size_t pos);
 char **remove_cmd(command_lst **head);
+command_lst *_update_cmd(command_lst **ptr, char *split, size_t count);
+command_lst *_update_the_cmd(const char *cmd);
 typedef struct cmd_btree
 {
     struct cmd_btree *success;

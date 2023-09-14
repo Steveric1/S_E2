@@ -6,7 +6,7 @@
  * Return: pointer to the new string
  */
 
-char *_strdup(char *str)
+char *_strdup(const char *str)
 {
 	char *new_str = NULL;
 	int i, len;

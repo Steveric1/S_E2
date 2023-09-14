@@ -77,3 +77,31 @@ command_lst *cmd_btree(const char * const *not_modifed  __attribute__((unused)))
 {
    return (NULL);
 }
+
+/**
+ * update_the_cmd - Process and update a linked list of commands from a string.
+ * @cmd: The input string containing multiple commands separated by a delimiter.
+ * 
+ * Return: A pointer to the head of the linked list containing processed commands.
+ *         NULL if the input string is empty or if memory allocation fails.
+*/
+command_lst *_update_the_cmd(const char *cmd)
+{
+    command_lst *head = NULL;
+    size_t count;
+    char *split;
+
+    split = _strdup(cmd);
+    if (!split)
+        return (NULL);
+    count = cmd_to_split(split);
+
+    if (_update_cmd(&head, split, count))
+    {
+        free_command_lst(&head);
+        return (NULL);
+    }
+    free_all(1, split);
+
+    return (head);
+}

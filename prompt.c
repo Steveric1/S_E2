@@ -1,19 +1,28 @@
 #include "main.h"
 #include "getline.h"
 #include "strtok.h"
-
+#include "shell_path.h"
 int main() {
-    char cmd[] = "This is 'a; test' with\\n escape; sequences";
-    size_t count = cmd_to_split(cmd), i;
-    char *token = cmd;
+    const char *inputString = "apple,banana,cherry,grape";
+    char delimiter = ',';
+    
+    path_helper help;
+    help.path = inputString;
+    help.delim = delimiter;
 
-    printf("Number of tokens: %lu\n", count);
+    // Call path_to_list to split the inputString
+    directory_n *resultList = path_to_list(NULL, help);
 
-    /*Print each token*/
-    for (i = 0; i < count; i++) {
-        printf("Token %lu: '%s'\n", i + 1, token);
-        /*Move to the next token (if any)*/
-        token += _strlen(token) + 1;
+    if (resultList) {
+        // Print the resulting list
+        directory_n *current = resultList;
+        while (current) {
+            printf("%s\n", current->path);
+            current = current->link;
+        }
+
+        // Free the memory allocated for the list (assuming you have a free_dir function)
+        free_dir(&resultList);
     }
 
     return 0;

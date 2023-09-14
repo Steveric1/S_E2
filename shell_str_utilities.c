@@ -116,3 +116,35 @@ size_t cmd_to_split(char *cmd)
     
     return (split.cmd_count);
 }
+
+/**
+ * _update_cmd - Process and update a linked list of commands.
+ * @ptr: A pointer to the head of the linked list.
+ * @split: A string containing commands separated by a delimiter.
+ * @count: The number of commands to process.
+ *
+ * This function processes the given `split` string, splitting it into commands
+ * and adding them to a linked list pointed to by `ptr`. It continues processing
+ * `count` commands or until the end of the string. If `split` is NULL or empty,
+ * the function returns the current state of the linked list.
+ *
+ * Return: A pointer to the updated linked list after processing.
+ */
+command_lst *_update_cmd(command_lst **ptr, char *split, size_t count)
+{
+    command_lst *tail = *ptr;
+
+    while (count > 0)
+    {
+        if (split == NULL)
+            return *ptr;
+        tail = at_the_end(ptr, split);
+
+        if (tail == NULL)
+            return NULL;
+        while (*split++)
+            ;
+        count--;          
+    }
+    return (*ptr);
+}
