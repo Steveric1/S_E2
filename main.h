@@ -10,6 +10,11 @@
 #include <syslog.h>
 #include <unistd.h>
 #include <stdbool.h>
+#include <signal.h>
+#include <sys/stat.h>
+#include <sys/wait.h>
+#include <sys/types.h>
+
 
 /**STRING PRTOTYPES**/
 char *_strcat(char *dest, const char *src);
@@ -123,6 +128,7 @@ command_lst *del_cmd_at_pos(command_lst **head, size_t pos);
 char **remove_cmd(command_lst **head);
 command_lst *_update_cmd(command_lst **ptr, char *split, size_t count);
 command_lst *_update_the_cmd(const char *cmd);
+
 typedef struct cmd_btree
 {
     struct cmd_btree *success;
@@ -130,4 +136,12 @@ typedef struct cmd_btree
     const char * const *ntmodified;
 } cmd_btree_lst;
 void free_command_btree(cmd_btree_lst **headptr);
+
+typedef struct error
+{
+    char *buf;
+    size_t len;
+    char *linenum_error;
+	const char *str_ret;
+} error_s;
 #endif /*MAIN_H*/

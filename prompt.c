@@ -1,7 +1,6 @@
 #include "main.h"
-#include "getline.h"
-#include "strtok.h"
-#include "shell_path.h"
+#include "headerfile.h"
+
 int main() {
     const char *inputString = "apple,banana,cherry,grape";
     char delimiter = ',';

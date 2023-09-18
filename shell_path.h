@@ -1,6 +1,7 @@
-#ifndef _SHELL_PATH_H
-#define _SHELL_PATH_H
+#ifndef _SHELL_PATH_H_
+#define _SHELL_PATH_H_
 
+#include <sys/stat.h>
 #include "main.h"
 #include "strtok.h"
 
@@ -21,5 +22,12 @@ typedef struct helper
 
 directory_n *path_to_list(directory_n **tail_ptr, path_helper help);
 directory_n *path_wrapper(path_helper help);
+
+
+typedef struct path_handler
+{
+    char **tokens;
+    char *cwd_s;
+}path_handler_s;
 
 #endif /*SHELL_PATH_H*/
