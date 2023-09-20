@@ -40,6 +40,8 @@ char **duplicateStringArray(char **array);
 bool _isdigit(int c);
 bool is_numeric(const char *str);
 unsigned int my_atoi(char *str);
+void handle_ctrl_c(int sig __attribute__((unused)));
+extern char **environ;
 
 /**SHELL ERROR**/
 void printerror(char **av, int count, char **arg);

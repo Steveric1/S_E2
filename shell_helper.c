@@ -32,6 +32,8 @@ void free_all(const unsigned int n, ...)
 store_info_t *init_prmpt(char **av, int ac)
 {
     static store_info_t my_info;
+    char *errorno;
+
     my_info.argv = av;
     my_info.argc = ac;
     my_info.fileno = STDIN_FILENO;
@@ -43,12 +45,17 @@ store_info_t *init_prmpt(char **av, int ac)
         
         if (my_info.fileno == -1)
         {
-            /*printerror(av, my_info.error, ac);*/
+            errorno = str_concat(NULL, " ", "Can't open", my_info.file);
+            handle_error(*av, my_info.line_read, errorno, NULL);
+            free_all(1, errorno);
             my_info.status = 127;
+            exit(release_store_infomation(&my_info));
         }
     }
     my_info.interactive = isatty(my_info.fileno);
-
+    my_info.p_pid = getpid();
+    my_info.cwd_s = getcwd(NULL, 0);
+    my_info.env = build_dict_from_env_caller(environ);
     return (&my_info);
 }
 
@@ -63,7 +70,7 @@ bool read_usr_input(store_info_t *input_info)
 {
     char *temp = NULL, *line = NULL;
     if (input_info->interactive)
-        write(STDIN_FILENO, "shell$: ", 9);
+        write(STDIN_FILENO, "shell$ ", 8);
     input_info->line_read += 1;
 
     while(process_usr_input(&input_info->line, input_info->fileno) & (QUOTE_DOUBLE |
