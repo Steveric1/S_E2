@@ -98,3 +98,15 @@ unsigned int my_atoi(char *str)
 
     return (atou.num);
 }
+
+/**
+ * Checks if a character is a special escape character within double quotes.
+ *
+ * @param c The character to check.
+ * @return 1 if the character is a double quote, dollar sign, or backslash;
+ *         0 otherwise.
+ */
+int is_double_quote_escape(char c)
+{
+    return (c == '"' || c == '$' || c == '\\');
+}

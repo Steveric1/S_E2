@@ -70,7 +70,7 @@ bool read_usr_input(store_info_t *input_info)
 {
     char *temp = NULL, *line = NULL;
     if (input_info->interactive)
-        write(STDIN_FILENO, "shell$ ", 8);
+        write(STDIN_FILENO, "shell$ ", 7);
     input_info->line_read += 1;
 
     while(process_usr_input(&input_info->line, input_info->fileno) & (QUOTE_DOUBLE |
@@ -80,7 +80,7 @@ bool read_usr_input(store_info_t *input_info)
         line = str_concat(NULL, "", temp, input_info->line);
         free_all(2, temp, input_info->line);
         if (input_info->interactive)
-            write(STDIN_FILENO, "shell$: ", 9);
+            write(STDIN_FILENO, "shell$: ", 8);
         input_info->line_read += 1;
     }
 

@@ -32,4 +32,16 @@ size_t quote_none(const char *str, quote_state *state);
 size_t quote_word(const char *str, quote_state *state);
 size_t quote_str_len(const char *str, quote_state state);
 quote_state process_usr_input(char **line_input, int fd);
+ssize_t remove_quotes_len(const char *str);
+
+struct dequote
+{
+    char *new;
+    size_t length;
+    size_t the_state_len;
+    quote_state q_state;
+};
+
+typedef struct dequote dequote_t;
+char *remove_quotes(const char *s);
 #endif

@@ -41,6 +41,7 @@ bool _isdigit(int c);
 bool is_numeric(const char *str);
 unsigned int my_atoi(char *str);
 void handle_ctrl_c(int sig __attribute__((unused)));
+int is_double_quote_escape(char c);
 extern char **environ;
 
 /**SHELL ERROR**/
@@ -85,6 +86,7 @@ bool read_usr_input(store_info_t *input_info);
 int release_store_infomation(store_info_t *store_info);
 int executeShellCommand(store_info_t *shell_info);
 int exec_init(store_info_t *shell_info);
+int command_processor(store_info_t *shell_info);
 /******STRING*******/
 char *str_concat(size_t *len, const char *delim, const char *prev, const char *next);
 
