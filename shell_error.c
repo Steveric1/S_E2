@@ -1,3 +1,4 @@
+#include "shellcmd.h"
 #include "main.h"
 
 /**
@@ -83,22 +84,22 @@ void handle_error(const char *av, size_t linenum, const char *error_m, ...)
 	va_list arg;
 
 	if (av)
-	    write(STDERR_FILENO, av, strlen(av));
+	    write(STDERR_FILENO, av, _strlen(av));
 	write(STDERR_FILENO, ": ", 3);
 	if (err.linenum_error)
-	    write(STDERR_FILENO, err.linenum_error, strlen(err.linenum_error));
+	    write(STDERR_FILENO, err.linenum_error, _strlen(err.linenum_error));
 	write(STDERR_FILENO, ": ", 3);
 	
 	va_start(arg, error_m);
 	while ((err.str_ret = va_arg(arg, char *)))
 	{
-		write(STDERR_FILENO, err.str_ret, strlen(err.str_ret));
+		write(STDERR_FILENO, err.str_ret, _strlen(err.str_ret));
 		write(STDERR_FILENO, ": ", 3);
 	}
 	va_end(arg);
 
 	if (error_m)
-	   write(STDERR_FILENO, error_m, strlen(error_m));
+	   write(STDERR_FILENO, error_m, _strlen(error_m));
 	write(STDERR_FILENO, ": ", 3);
 
 	free(err.linenum_error);

@@ -1,6 +1,5 @@
-#include "getline.h"
 #include "main.h"
-
+#include "getline.h"
 /**
  * _getline_append - appends input to line
  * @buff: buffer

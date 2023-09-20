@@ -1,4 +1,5 @@
 #include "dictionary.h"
+#include "main.h"
 
 /**
  * build_env_array - Build an environment variable array from a linked list

@@ -1,4 +1,5 @@
 #include "dictionary.h"
+#include "main.h"
 
 /**
  * add_dict_to_the_end - Add a new node with key and value to the end of a linked list.

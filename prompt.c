@@ -1,28 +1,33 @@
 #include "main.h"
-#include "headerfile.h"
 
-int main() {
-    const char *inputString = "apple,banana,cherry,grape";
-    char delimiter = ',';
-    
-    path_helper help;
-    help.path = inputString;
-    help.delim = delimiter;
+void handle_ctrl_c(int sig __attribute__((unused)))
+{
+	write(1, "\nshell$ ", 9);
+	signal(SIGINT, handle_ctrl_c);
+}
 
-    // Call path_to_list to split the inputString
-    directory_n *resultList = path_to_list(NULL, help);
 
-    if (resultList) {
-        // Print the resulting list
-        directory_n *current = resultList;
-        while (current) {
-            printf("%s\n", current->path);
-            current = current->link;
+int main(int ac, char **av)
+{
+    store_info_t *shell_info;
+    shell_info = init_prmpt(av, ac);
+    signal(SIGINT, handle_ctrl_c);
+
+    while (read_usr_input(shell_info))
+    {
+        while ((shell_info->tokens = remove_cmd(&(shell_info->cmd))))
+        {
+            executeShellCommand(shell_info);
+            release_mem(&(shell_info->tokens));
         }
-
-        // Free the memory allocated for the list (assuming you have a free_dir function)
-        free_dir(&resultList);
+        free_all(1, shell_info->line);
+        shell_info->line = NULL;
     }
+    if (shell_info->interactive)
+		write(STDOUT_FILENO, "\n", 2);
 
-    return 0;
+	if (shell_info->file)
+		close(shell_info->fileno);
+
+	exit(release_store_infomation(shell_info));
 }

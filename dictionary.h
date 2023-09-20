@@ -3,7 +3,8 @@
 
 #include <stdio.h>
 #include <unistd.h>
-#include "main.h"
+#include "shellcmd.h"
+
 /*Build an environment dictionary*/
 typedef struct shell_dict
 {
@@ -17,4 +18,7 @@ char *get_value(shell_dict_s *head, const char *key);
 shell_dict_s *get_node(shell_dict_s *head, const char *key);
 shell_dict_s *delete_nodes(shell_dict_s **headptr, const char *key);
 void free_dictionary(shell_dict_s **headptr);
+char **build_env_array(shell_dict_s *ptr);
+shell_dict_s *build_dict_from_env(shell_dict_s **head_ptr, char **env);
+shell_dict_s *build_dict_from_env_caller(char **env);
 #endif /*DICTIONARY*/

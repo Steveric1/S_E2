@@ -1,4 +1,6 @@
+#include "shellcmd.h"
 #include "strtok.h"
+#include "main.h"
 
 /**
  * tok_counter - function to get the length of string in

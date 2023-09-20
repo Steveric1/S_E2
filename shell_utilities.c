@@ -49,7 +49,7 @@ ssize_t _memchr(const void *s, int c, size_t n)
  * @s2: The second string to compare
  * Return: s1 - s2
  */
-int _strcmp(char *s1, char *s2)
+int _strcmp(const char *s1, const char *s2)
 {
 	int e;
 

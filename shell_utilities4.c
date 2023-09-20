@@ -1,5 +1,7 @@
+#include "shellcmd.h"
+#include "strtok.h"
 #include "main.h"
-#include "getline.h"
+
 /**
  * quote_factory - function pointer string processor helper
  * @state: state

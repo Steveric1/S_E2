@@ -1,4 +1,6 @@
-#include "shell_path.h"
+#include "shellcmd.h"
+#include "strtok.h"
+#include "secondpath.h"
 
 /**
  * handle_path - function to handle path and process it
@@ -6,7 +8,7 @@
  * @path_dir: path directory
  * Return: path name or NULL if not find.
 */
-char *handle_path(path_handler_s *path_info, directory_n *path_dir)
+char *handle_path(store_info_t *path_info, directory_n *path_dir)
 {
     char *pathname_se, *cmd;
     struct stat st;

@@ -1,7 +1,9 @@
 #ifndef _STRTOK_H_
 #define _STRTOK_H_
 
-#include "main.h"
+// #include "shellcmd.h"
+#include <stdlib.h>
+#include "myquote.h"
 
 typedef struct strtok
 {

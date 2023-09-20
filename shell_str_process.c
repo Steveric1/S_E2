@@ -1,3 +1,5 @@
+#include "shellcmd.h"
+#include "strtok.h"
 #include "main.h"
 
 /**

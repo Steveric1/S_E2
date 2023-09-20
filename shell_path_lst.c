@@ -1,4 +1,7 @@
+#include "shellcmd.h"
 #include "shell_path.h"
+#include "main.h"
+
 
 /**
  * add_at_beg - Add a new node at the beginning of a linked list.
@@ -98,26 +101,26 @@ void free_dir(directory_n **head_ptr)
  * @help: A path_helper structure containing path and delimiter information.
  * Returns: A pointer to the head of the linked list on success, or NULL on failure.
  */
-directory_n *path_to_list(directory_n **tail_ptr, path_helper help)
+directory_n *path_to_list(directory_n **tail_ptr, const char *path, char delim)
 {
     directory_n *head, *tail;
     ssize_t length;
     head = tail = NULL;
 
-    while (*(help.path))
+    while (*path)
     {
-        length = _strchr(help.path, help.delim);
+        length = _strchr(path, delim);
         if (length == -1)
-            length = _strlen(help.path);
+            length = _strlen(path);
         
-        tail = dir_at_the_end(&head, help.path);
+        tail = dir_at_the_end(&head, path);
         if (tail == NULL)
         {
             free_dir(&head);
             return (NULL);
         }
 
-        tail->path = _memdup(help.path, length + 1);
+        tail->path = _memdup(path, length + 1);
         if (tail->path == NULL)
         {
             free_dir(&head);
@@ -125,7 +128,7 @@ directory_n *path_to_list(directory_n **tail_ptr, path_helper help)
         }
 
         tail->path[length] = '\0';
-        help.path += length + 1;
+        path += length + 1;
     }
 
     if (tail_ptr)
@@ -138,14 +141,14 @@ directory_n *path_to_list(directory_n **tail_ptr, path_helper help)
  * @help: A path_helper structure containing path and delimiter information.
  * Returns: A pointer to the head of the linked list on success, or NULL on failure.
  */
-directory_n *path_wrapper(path_helper help)
+directory_n *path_wrapper(const char *path, char delim)
 {
     directory_n *head = NULL;
 
-    if (!help.path)
+    if (!path)
         return (NULL);
     
-    if (!path_to_list(&head, help))
+    if (!path_to_list(&head, path, delim))
         free_dir(&head);
     return (head);
 }
